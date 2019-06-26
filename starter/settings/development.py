@@ -7,12 +7,12 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-print('---------------started--------------')
-print(BASE_DIR)
-print(os.path.dirname(os.path.abspath(__file__)))
-print(os.path.abspath(__file__))
-print(type(__file__))
-print(type(os.path.abspath(__file__)))
+# print('---------------started--------------')
+# print(BASE_DIR)
+# print(os.path.dirname(os.path.abspath(__file__)))
+# print(os.path.abspath(__file__))
+# print(type(__file__))
+# print(type(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.facebook',
+    # 'allauth.socialaccount.providers.facebook',
     # end of allauth
 
     'django.contrib.auth',
@@ -115,4 +115,21 @@ STATIC_URL = '/static/'
 
 # Added by me
 
+# for allauth
+
 SITE_ID = 1
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS =1
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400 # 1 day in seconds
+ACCOUNT_LOGOUT_REDIRECT_URL ='/'
+LOGIN_REDIRECT_URL = '/'
+
+# for email verification
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
